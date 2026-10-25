@@ -1,0 +1,642 @@
+{
+  "name": "Weekly Owner Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1456,
+        272
+      ],
+      "id": "95221ad0-2aa4-40a2-9cba-13aed8d2c27a",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_MISSED_CALLS_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Missed Calls Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_MISSED_CALLS_SHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_MISSED_CALLS_SHEET_ID/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -912,
+        528
+      ],
+      "id": "ffbed9bf-924e-4bac-9a12-9eb0acc4de7b",
+      "name": "Get Missed Calls",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_LEADS_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Lead Qualification Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Qualified leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -912,
+        -176
+      ],
+      "id": "eef6e626-02ec-41d3-a5cf-7916eabf8c5e",
+      "name": "Get Qualified Leads",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_LEADS_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Lead Qualification Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2147409336,
+          "mode": "list",
+          "cachedResultName": "Unqualified leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit#gid=2147409336"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -912,
+        0
+      ],
+      "id": "c25b5b27-9230-42aa-9192-fbbe44a87605",
+      "name": "Get Unqualified Leads",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_LEADS_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Lead Qualification Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 138364158,
+          "mode": "list",
+          "cachedResultName": "Invalid Submissions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_LEADS_SHEET_ID/edit#gid=138364158"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -912,
+        704
+      ],
+      "id": "6a05e620-622f-4c6a-9a59-768a43701af1",
+      "name": "Get Invalid Submissions",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "renewals",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -912,
+        176
+      ],
+      "id": "3934643a-b6e7-412b-a7a6-b6aadfc96e9e",
+      "name": "Get Renewals",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "REPLACE_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "reviews",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -912,
+        352
+      ],
+      "id": "3cf99d24-c64c-4677-9382-47c359eb7517",
+      "name": "Get Reviews",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "REPLACE_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 6
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -432,
+        224
+      ],
+      "id": "25784c93-6a66-48a6-b984-cec9125ea690",
+      "name": "Wait For All Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);\n\nfunction lastWeek(node, dateField) {\n  return $(node).all()\n    .map(i => i.json)\n    .filter(r => r[dateField] && new Date(r[dateField]) >= since);\n}\n\nconst missed = lastWeek('Get Missed Calls', 'timestamp');\nconst qualified = lastWeek('Get Qualified Leads', 'timestamp');\nconst unqualified = lastWeek('Get Unqualified Leads', 'timestamp');\nconst invalid = lastWeek('Get Invalid Submissions', 'timestamp');\nconst renewals = lastWeek('Get Renewals', 'created_at');\nconst reviews = lastWeek('Get Reviews', 'created_at');\n\nconst positive = reviews.filter(r => r.sentiment === 'positive').length;\nconst negative = reviews.filter(r => r.sentiment === 'negative').length;\n\nreturn [{\n  json: {\n    period: `${since.toISOString().slice(0, 10)} to ${new Date().toISOString().slice(0, 10)}`,\n    missed_calls: missed.length,\n    new_leads: qualified.length + unqualified.length,\n    qualified_leads: qualified.length,\n    unqualified_leads: unqualified.length,\n    invalid_submissions: invalid.length,\n    renewals: renewals.length,\n    reviews: reviews.length,\n    positive_reviews: positive,\n    negative_reviews: negative\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        288
+      ],
+      "id": "e048bae3-6e24-4ac8-9878-9ee76db6a008",
+      "name": "Calculate Weekly Stats"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are writing a weekly business digest for an HVAC company owner.\nUse ONLY the numbers below. Do not invent anything.\n\nPeriod: {{ $json.period }}\nMissed calls: {{ $json.missed_calls }}\nNew leads: {{ $json.new_leads }} (qualified: {{ $json.qualified_leads }}, unqualified: {{ $json.unqualified_leads }})\nInvalid submissions: {{ $json.invalid_submissions }}\nRenewals: {{ $json.renewals }}\nReviews: {{ $json.reviews }} (positive: {{ $json.positive_reviews }}, negative: {{ $json.negative_reviews }})\n\nWrite a short, friendly email body (under 150 words):\n1. One-line summary of the week\n2. The key numbers as bullet points\n3. One suggested action for next week\n\nPlain text only. No subject line."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        80,
+        288
+      ],
+      "id": "35c1c6fb-a73e-4a90-9ef7-1cb7754c4d3f",
+      "name": "Write Digest",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUR_EMAIL@example.com",
+        "subject": "=Weekly Owner Digest: {{ $('Calculate Weekly Stats').item.json.period }}",
+        "emailType": "text",
+        "message": "={{ $json.output[0].content[0].text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        192
+      ],
+      "id": "fd6dbf8f-f561-4902-a365-d1279c0603bc",
+      "name": "Send Digest",
+      "retryOnFail": true,
+      "alwaysOutputData": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUR_EMAIL@example.com",
+        "subject": "=Weekly Owner Digest (basic): {{ $('Calculate Weekly Stats').item.json.period }}",
+        "emailType": "text",
+        "message": "=Weekly numbers ({{ $('Calculate Weekly Stats').item.json.period }}):  Missed calls: {{ $('Calculate Weekly Stats').item.json.missed_calls }} New leads: {{ $('Calculate Weekly Stats').item.json.new_leads }} Qualified leads: {{ $('Calculate Weekly Stats').item.json.qualified_leads }} Unqualified leads: {{ $('Calculate Weekly Stats').item.json.unqualified_leads }} Invalid submissions: {{ $('Calculate Weekly Stats').item.json.invalid_submissions }} Renewals: {{ $('Calculate Weekly Stats').item.json.renewals }} Reviews: {{ $('Calculate Weekly Stats').item.json.reviews }} (positive: {{ $('Calculate Weekly Stats').item.json.positive_reviews }}, negative: {{ $('Calculate Weekly Stats').item.json.negative_reviews }})",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        480
+      ],
+      "id": "877a0085-f69e-418f-93f4-a98ed04a193a",
+      "name": "Send Fallback Digest",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "digest_log",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "period",
+              "fieldValue": "={{ $('Calculate Weekly Stats').item.json.period }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "sent"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        656,
+        96
+      ],
+      "id": "7b6aafdd-f2d8-4427-b85a-ca78a17d0091",
+      "name": "Log Sent",
+      "credentials": {
+        "supabaseApi": {
+          "id": "REPLACE_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "digest_log",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "period",
+              "fieldValue": "={{ $('Calculate Weekly Stats').item.json.period }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "sent_fallback"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        656,
+        480
+      ],
+      "id": "6bdc4b71-c4f5-44d8-a940-c1221d429635",
+      "name": "Log Fallback",
+      "credentials": {
+        "supabaseApi": {
+          "id": "REPLACE_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "digest_log",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "period",
+              "fieldValue": "={{ $('Calculate Weekly Stats').item.json.period }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "failed"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        656,
+        288
+      ],
+      "id": "1550a560-d825-4d2f-8e5e-8b819e6057c8",
+      "name": "Log Failed",
+      "credentials": {
+        "supabaseApi": {
+          "id": "REPLACE_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "Weekly Owner Digest failed to send. Check n8n.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        288
+      ],
+      "id": "7e41559c-9385-4064-8a01-1553c03f052d",
+      "name": "Alert Failed",
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Missed Calls",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Qualified Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Unqualified Leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Invalid Submissions",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Renewals",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Missed Calls": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Get Qualified Leads": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Unqualified Leads": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Renewals": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Get Reviews": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Get Invalid Submissions": {
+      "main": [
+        [
+          {
+            "node": "Wait For All Data",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "Wait For All Data": {
+      "main": [
+        [
+          {
+            "node": "Calculate Weekly Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Weekly Stats": {
+      "main": [
+        [
+          {
+            "node": "Write Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Digest": {
+      "main": [
+        [
+          {
+            "node": "Send Digest",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Fallback Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Digest": {
+      "main": [
+        [
+          {
+            "node": "Log Sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Fallback Digest": {
+      "main": [
+        [
+          {
+            "node": "Log Fallback",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Failed": {
+      "main": [
+        [
+          {
+            "node": "Alert Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "id": "",
+  "tags": []
+}
